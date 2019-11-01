@@ -64,6 +64,7 @@
 		1550BDF12330C34F00E2FE4F /* AsyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1550BDF32330C34F00E2FE4F /* AsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTests.swift; sourceTree = "<group>"; };
 		1550BDF52330C34F00E2FE4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15BC0D9C236C355A00446092 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		15CB85D6232F6CE600E7A26F /* ThrowingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowingTests.swift; sourceTree = "<group>"; };
 		15D3D87523258E0600C61F4B /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		15D3D87723258E4300C61F4B /* ConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTests.swift; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 				15076B09231FA842006D5AA4 /* Info.plist */,
 				15076B2B231FA8BA006D5AA4 /* Hater.swift */,
 				15D3D87523258E0600C61F4B /* Converter.swift */,
+				15BC0D9C236C355A00446092 /* TestingPlayground.playground */,
 			);
 			path = First;
 			sourceTree = "<group>";

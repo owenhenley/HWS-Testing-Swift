@@ -18,6 +18,8 @@
 		1550BDF42330C34F00E2FE4F /* AsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1550BDF32330C34F00E2FE4F /* AsyncTests.swift */; };
 		15BC0D9E236C450700446092 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC0D9D236C450700446092 /* User.swift */; };
 		15BC0DA0236C460100446092 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC0D9F236C460100446092 /* UserTests.swift */; };
+		15BC0DA2236C4D7400446092 /* PrimeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC0DA1236C4D7400446092 /* PrimeCalculator.swift */; };
+		15BC0DA4236C4F3700446092 /* PrimeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC0DA3236C4F3700446092 /* PrimeCalculatorTests.swift */; };
 		15CB85D7232F6CE600E7A26F /* ThrowingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CB85D6232F6CE600E7A26F /* ThrowingTests.swift */; };
 		15D3D87623258E0600C61F4B /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D3D87523258E0600C61F4B /* Converter.swift */; };
 		15D3D87823258E4300C61F4B /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D3D87723258E4300C61F4B /* ConverterTests.swift */; };
@@ -69,6 +71,8 @@
 		15BC0D9C236C355A00446092 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		15BC0D9D236C450700446092 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		15BC0D9F236C460100446092 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
+		15BC0DA1236C4D7400446092 /* PrimeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeCalculator.swift; sourceTree = "<group>"; };
+		15BC0DA3236C4F3700446092 /* PrimeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeCalculatorTests.swift; sourceTree = "<group>"; };
 		15CB85D6232F6CE600E7A26F /* ThrowingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowingTests.swift; sourceTree = "<group>"; };
 		15D3D87523258E0600C61F4B /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		15D3D87723258E4300C61F4B /* ConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTests.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				15D3D87523258E0600C61F4B /* Converter.swift */,
 				15BC0D9C236C355A00446092 /* TestingPlayground.playground */,
 				15BC0D9D236C450700446092 /* User.swift */,
+				15BC0DA1236C4D7400446092 /* PrimeCalculator.swift */,
 			);
 			path = First;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 				15D3D87923263A3900C61F4B /* LifecycleTests.swift */,
 				15CB85D6232F6CE600E7A26F /* ThrowingTests.swift */,
 				15BC0D9F236C460100446092 /* UserTests.swift */,
+				15BC0DA3236C4F3700446092 /* PrimeCalculatorTests.swift */,
 			);
 			path = FirstTests;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				15076B00231FA841006D5AA4 /* ViewController.swift in Sources */,
 				15076AFE231FA841006D5AA4 /* AppDelegate.swift in Sources */,
 				15D3D87623258E0600C61F4B /* Converter.swift in Sources */,
+				15BC0DA2236C4D7400446092 /* PrimeCalculator.swift in Sources */,
 				15BC0D9E236C450700446092 /* User.swift in Sources */,
 				15076B2C231FA8BA006D5AA4 /* Hater.swift in Sources */,
 			);
@@ -353,6 +360,7 @@
 				15D3D87823258E4300C61F4B /* ConverterTests.swift in Sources */,
 				15D3D87A23263A3900C61F4B /* LifecycleTests.swift in Sources */,
 				15BC0DA0236C460100446092 /* UserTests.swift in Sources */,
+				15BC0DA4236C4F3700446092 /* PrimeCalculatorTests.swift in Sources */,
 				15076B13231FA843006D5AA4 /* FirstTests.swift in Sources */,
 				15CB85D7232F6CE600E7A26F /* ThrowingTests.swift in Sources */,
 			);

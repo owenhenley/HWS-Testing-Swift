@@ -49,3 +49,48 @@ struct Cake {
         return 10 // mutation, test will pass, but doesnt mee the code is working
     }
 }
+
+// MARK: - Dependency Injection
+
+struct App {
+    
+    var price: Decimal
+    var minimumAge: Int
+    var isReleased: Bool
+    
+    func canBePurchased(by user: User) -> Bool {
+        
+        guard isReleased else {
+            return false
+        }
+        
+        guard user.funds >= price else {
+            return false
+        }
+        
+        if user.age >= minimumAge {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+struct User {
+    
+    var funds: Decimal
+    var age: Int
+    var apps: [App]
+    
+    mutating func buy(_ app: App) -> Bool {
+        let possible = app.canBePurchased(by: self)
+        
+        if possible {
+            apps.append(app)
+            funds -= app.price
+            return true
+        } else {
+            return false
+        }
+    }
+}

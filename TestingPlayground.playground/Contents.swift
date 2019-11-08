@@ -312,3 +312,92 @@ import XCTest
 //}
 
 
+// MARK: - Partial mocks vs full mocks
+
+//struct PowerMonitor {
+//    var device: UIDevice
+//
+//    func getStatus() -> String {
+//        if UIDevice.current.batteryState == .unplugged {
+//            return "Power is down"
+//        } else if device.batteryState == .unknown {
+//            return "Error"
+//        } else {
+//            return "Power is up"
+//        }
+//    }
+//}
+//
+//func testUnpluggedDeviceShowsDown() {
+//    // given
+//    let sut = PowerMonitor(device: DeviceMockPartial(testBatteryState: .unplugged))
+//
+//    // when
+//    let status = sut.getStatus()
+//
+//    // then
+//    XCTAssertEqual(status, "Power is down")
+//}
+//
+//// Partial Mock
+//class DeviceMockPartial: UIDevice {
+//    var testBatteryState: BatteryState
+//
+//    init(testBatteryState: BatteryState) {
+//        self.testBatteryState = testBatteryState
+//        super.init()
+//    }
+//
+//    override var batteryState: BatteryState {
+//        return testBatteryState
+//    }
+//}
+//
+//// That ^^^ replaces this vvv
+//
+////class UnpluggedDeviceMock: UIDevice {
+////    override var batteryState: BatteryState {
+////        return .unplugged
+////    }
+////}
+////
+////class UnknownDeviceMock: UIDevice {
+////    override var batteryState: BatteryState {
+////        return .unknown
+////    }
+////}
+////class ChargingDeviceMock: UIDevice {
+////    override var batteryState: BatteryState {
+////        return .charging
+////    }
+////}
+//
+//// Full Mock
+//protocol DeviceProtocol {
+//    var batteryState: UIDevice.BatteryState { get }
+//}
+//
+//extension UIDevice: DeviceProtocol { }
+//
+//struct DeviceMockFull: DeviceProtocol {
+//    var testBatteryState: UIDevice.BatteryState
+//    var batteryState: UIDevice.BatteryState {
+//        return testBatteryState
+//    }
+//
+//}
+//
+//struct PowerMonitorPartial {
+//    var device: DeviceProtocol
+//
+//    func getStatus() -> String {
+//        if device.batteryState == .unplugged {
+//            return "Power is down"
+//        } else if device.batteryState == .unknown {
+//            return "Error"
+//        } else {
+//            return "Power is up" }
+//    }
+//}
+
+// MARK: - Mocking preconditions and assertions

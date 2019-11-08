@@ -52,13 +52,28 @@ struct Cake {
 
 // MARK: - Dependency Injection
 
-struct App {
+protocol AppProtocol {
+    var price: Decimal { get set }
+    var minimumAge: Int { get set }
+    var isReleased: Bool { get set }
+    
+    func canBePurchased(by user: UserProtocol) -> Bool
+    static func printTerms()
+}
+
+extension AppProtocol {
+    static func printTerms() {
+        print("Here are 50 pages of terms and conditions for you to read on a tiny phone screen.")
+    }
+}
+
+struct App: AppProtocol {
     
     var price: Decimal
     var minimumAge: Int
     var isReleased: Bool
     
-    func canBePurchased(by user: User) -> Bool {
+    func canBePurchased(by user: UserProtocol) -> Bool {
         
         guard isReleased else {
             return false
@@ -76,14 +91,23 @@ struct App {
     }
 }
 
-struct User {
+protocol UserProtocol {
+    var funds: Decimal { get set }
+    var age: Int { get set }
+    var apps: [AppProtocol] { get set }
+    
+    mutating func buy(_ app: AppProtocol) -> Bool
+}
+
+struct User: UserProtocol {
     
     var funds: Decimal
     var age: Int
-    var apps: [App]
+    var apps: [AppProtocol]
     
-    mutating func buy(_ app: App) -> Bool {
+    mutating func buy(_ app: AppProtocol) -> Bool {
         let possible = app.canBePurchased(by: self)
+        type(of: app).printTerms()
         
         if possible {
             apps.append(app)
@@ -94,3 +118,26 @@ struct User {
         }
     }
 }
+
+func testCanBePurchacedIsFalse_WhenNotReleased() {
+    struct UnreleasedAppStub: AppProtocol {
+        // A minimal implementation of the protocol, with hard-coded values that make it do a specific thing. - A stub
+        var price: Decimal = 0
+        var minimumAge = 0
+        var isReleased = false
+        
+        func canBePurchased(by user: UserProtocol) -> Bool { false }
+    }
+    
+    // given
+    var sut = User(funds: 100, age: 21, apps: [])
+    let app = UnreleasedAppStub()
+    
+    // when
+    let wasBought = sut.buy(app)
+    
+    // then
+    XCTAssertFalse(wasBought)
+}
+
+//testCanBePurchacedIsFalse_WhenNotReleased()

@@ -24,31 +24,31 @@ import XCTest
 //    verifyDivision(result, expectedQuotient: 3, expectedRemainder: 2)
 //}
 
-class Tests: XCTestCase {
-    func testThreeIngredientCakeCosts9() {
-        // given
-        let cake = Cake()
-        let ingredients = ["chocolate", "cherries", "frosting"]
-        // when
-        let cost = cake.bake(ingredients: ingredients)
-        // then
-        XCTAssertEqual(cost, 10)
-    }
-}
+//class Tests: XCTestCase {
+//    func testThreeIngredientCakeCosts9() {
+//        // given
+//        let cake = Cake()
+//        let ingredients = ["chocolate", "cherries", "frosting"]
+//        // when
+//        let cost = cake.bake(ingredients: ingredients)
+//        // then
+//        XCTAssertEqual(cost, 10)
+//    }
+//}
 
 
-struct Cake {
-    func bake(ingredients: [String]) -> Int {
-        
-        for ingredient in ingredients {
-            print("Adding \(ingredient).")
-        }
-        
-        let cost = 1 + (ingredients.count * 3)
-        print("The cake is ready; please pay \(cost).")
-        return 10 // mutation, test will pass, but doesnt mee the code is working
-    }
-}
+//struct Cake {
+//    func bake(ingredients: [String]) -> Int {
+//
+//        for ingredient in ingredients {
+//            print("Adding \(ingredient).")
+//        }
+//
+//        let cost = 1 + (ingredients.count * 3)
+//        print("The cake is ready; please pay \(cost).")
+//        return 10 // mutation, test will pass, but doesnt mee the code is working
+//    }
+//}
 
 // MARK: - Dependency Injection
 
@@ -159,63 +159,63 @@ struct Cake {
     
     // MARK: - Injecting closures
     
-class ShareView: UIView {
-    var shareAction: (String) -> Void
-    var textField: UITextField!
-    
-    init(shareAction: @escaping (String) -> Void) {
-        self.shareAction = shareAction
-        super.init(frame: .zero)
-        
-        let textField = UITextField()
-        textField.sizeAndPositionHoweverYouWant()
-        addSubview(textField)
-        
-        let button = UIButton(type: .system)
-        button.sizeAndPositionHoweverYouWant()
-        button.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
-        
-        addSubview(textField)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) is not supported.")
-    }
-    
-    @objc func shareTapped() {
-        guard let text = textField.text else {
-            return
-        }
-        shareAction(text)
-    }
-}
+//class ShareView: UIView {
+//    var shareAction: (String) -> Void
+//    var textField: UITextField!
+//
+//    init(shareAction: @escaping (String) -> Void) {
+//        self.shareAction = shareAction
+//        super.init(frame: .zero)
+//
+//        let textField = UITextField()
+//        textField.sizeAndPositionHoweverYouWant()
+//        addSubview(textField)
+//
+//        let button = UIButton(type: .system)
+//        button.sizeAndPositionHoweverYouWant()
+//        button.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
+//
+//        addSubview(textField)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) is not supported.")
+//    }
+//
+//    @objc func shareTapped() {
+//        guard let text = textField.text else {
+//            return
+//        }
+//        shareAction(text)
+//    }
+//}
 
 
-class ShareViewController: UIViewController {
-    override func loadView() {
-        view = ShareView { [weak self] in
-            self?.shareContent(text: $0)
-        }
-    }
-    
-    func shareContent(text: String) {
-        print("Sharing text...")
-    }
-}
+//class ShareViewController: UIViewController {
+//    override func loadView() {
+//        view = ShareView { [weak self] in
+//            self?.shareContent(text: $0)
+//        }
+//    }
+//
+//    func shareContent(text: String) {
+//        print("Sharing text...")
+//    }
+//}
 
-struct URLHandler {
-//    let application: ApplicationProtocol
-//    let urlOpener: URLOpening = UIApplication.shared.open // typealias
-    let urlOpener: (URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void = UIApplication.shared.open
-    
-    func open(url: URL) {
-        if url.absoluteString.hasPrefix("internal://") {
-            // run some app-specific code
-        } else {
-            application.open(url, options: [:], completionHandler: nil)
-        }
-    }
-}
+//struct URLHandler {
+////    let application: ApplicationProtocol
+////    let urlOpener: URLOpening = UIApplication.shared.open // typealias
+//    let urlOpener: (URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void = UIApplication.shared.open
+//
+//    func open(url: URL) {
+//        if url.absoluteString.hasPrefix("internal://") {
+//            // run some app-specific code
+//        } else {
+//            application.open(url, options: [:], completionHandler: nil)
+//        }
+//    }
+//}
 
 // TypeAlias?
 //typealias URLOpening = (URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void
@@ -233,3 +233,82 @@ struct URLHandler {
 //}
 
 //extension UIApplication: ApplicationProtocol { }
+
+// MARK: - Injecting Everything
+
+// Basically, dont do it. - “many client-specific interfaces are better than one general-purpose interface”
+
+//struct Dependencies {
+//    var singleton1: SomeThing
+//    var singleton2: SomeOtherThing
+//    var singleton3: AThirdThing
+//    var singleton4: AFourthThing
+//    var singleton5: AFifthThing
+//    var singleton6: ASixthThing
+//}
+
+//struct StagingDependencies {
+//    var singletonDouble1: SomeThing
+//    var singletonDouble2: SomeOtherThing
+//    var singletonDouble3: AThirdThing
+//    var singletonDouble4: AFourthThing
+//    var singletonDouble5: AFifthThing
+//    var singletonDouble6: ASixthThing
+//}
+
+// MARK: - Mocking
+
+//class Buyer {
+//    func view(_ house: HouseProtocol) {
+//        house.conductViewing() }
+//}
+//
+//protocol HouseProtocol {
+//    var numberOfViewings: Int { get set }
+//    func conductViewing()
+//}
+//
+//class House: HouseProtocol {
+//    var numberOfViewings = 0
+//
+//    func conductViewing() {
+//        numberOfViewings += 1
+//    }
+//}
+//
+//func testViewingHouseAddsOneToViewings() {
+//    // given
+//    let sut = House()
+//    let startViewings = sut.numberOfViewings
+//
+//    // when
+//    sut.conductViewing()
+//
+//    // then
+//    XCTAssertEqual(sut.numberOfViewings, startViewings + 1)
+//}
+//
+//func testBuyer() {
+//    // given
+//    let sut = Buyer()
+//    let house = MockHouse()
+//
+//    // when
+//    sut.view(house)
+//
+//    // then
+////    XCTAssertEqual(house.numberOfViewings, 1)
+//    XCTAssertEqual(house.conductViewingCallcount, 1)
+//}
+//
+//class MockHouse: HouseProtocol {
+//    var numberOfViewings = 0
+//    var conductViewingCallcount = 0
+//
+//    func conductViewing() {
+//        numberOfViewings += 1
+//        conductViewingCallcount += 1
+//    }
+//}
+
+

@@ -145,7 +145,7 @@ struct Cake {
 // MARK: - Injection
 
 // Best practice
-struct Tweet {
+//struct Tweet {
 //    let text: String
 //    let author: String
 //    let date: Date
@@ -156,7 +156,80 @@ struct Tweet {
 //        self.date = date
 //    }
 //}
+    
+    // MARK: - Injecting closures
+    
+class ShareView: UIView {
+    var shareAction: (String) -> Void
+    var textField: UITextField!
+    
+    init(shareAction: @escaping (String) -> Void) {
+        self.shareAction = shareAction
+        super.init(frame: .zero)
+        
+        let textField = UITextField()
+        textField.sizeAndPositionHoweverYouWant()
+        addSubview(textField)
+        
+        let button = UIButton(type: .system)
+        button.sizeAndPositionHoweverYouWant()
+        button.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
+        
+        addSubview(textField)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported.")
+    }
+    
+    @objc func shareTapped() {
+        guard let text = textField.text else {
+            return
+        }
+        shareAction(text)
+    }
+}
 
-// MARK: - Where constructor injection fails... and succeeds
+
+class ShareViewController: UIViewController {
+    override func loadView() {
+        view = ShareView { [weak self] in
+            self?.shareContent(text: $0)
+        }
+    }
+    
+    func shareContent(text: String) {
+        print("Sharing text...")
+    }
+}
+
+struct URLHandler {
+//    let application: ApplicationProtocol
+//    let urlOpener: URLOpening = UIApplication.shared.open // typealias
+    let urlOpener: (URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void = UIApplication.shared.open
+    
+    func open(url: URL) {
+        if url.absoluteString.hasPrefix("internal://") {
+            // run some app-specific code
+        } else {
+            application.open(url, options: [:], completionHandler: nil)
+        }
+    }
+}
+
+// TypeAlias?
+//typealias URLOpening = (URL, [UIApplication.OpenExternalURLOptionsKey: Any], ((Bool) -> Void)?) -> Void
+
+// Rather than creating an ApplicationProtocol protocol, making UIApplication conform to it, building
+// a test double and making that conform to it, then adding an ApplicationProtocol property to our
+// type, we can just make URLHandler have a single property specifying what code should be run to open external URLs
 
 
+// Not needed!
+//protocol ApplicationProtocol {
+//    func open(_ url: URL,
+//              options: [UIApplication.OpenExternalURLOptionsKey: Any],
+//              completionHandler completion: ((Bool) -> Void)?)
+//}
+
+//extension UIApplication: ApplicationProtocol { }

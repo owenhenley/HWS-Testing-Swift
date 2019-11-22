@@ -401,3 +401,27 @@ import XCTest
 //}
 
 // MARK: - Mocking preconditions and assertions
+
+class User { }
+
+class Store {
+    var user: User?
+    func buy(product: String) -> Bool {
+        assert(user != nil, "We can't buy anything without a user.")
+        print("The user bought \(product).")
+        return true
+    }
+}
+
+func testStoreBuyingWithoutUser() {
+    // given
+    let store = Store()
+    
+    // when
+    let success = store.buy(product: "War of the Worlds")
+    
+    // then
+    XCTAssertTrue(success)
+}
+
+// p.157

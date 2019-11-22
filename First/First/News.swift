@@ -27,8 +27,38 @@ class News {
     }
 }
 
+// MARK: - URLSession Protocol
+
 protocol URLSessionProtocol {
     func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
 extension URLSession: URLSessionProtocol { }
+
+// MARK: - Mocks
+
+class DataTaskMock: URLSessionDataTask {
+    var completionHandler: (Data?, URLResponse?, Error?) -> Void
+    var resumeWasCalled = false
+    
+    init(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        self.completionHandler = completionHandler
+    }
+    
+    override func resume() {
+        // resume was called, so flip our boolean and call the completion
+        resumeWasCalled = true
+        completionHandler(nil, nil, nil)
+    }
+}
+
+class URLSessionMock: URLSessionProtocol {
+    var dataTask: DataTaskMock?
+    
+    func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        let newDataTask = DataTaskMock(completionHandler: completionHandler)
+        dataTask = newDataTask
+        
+        return newDataTask
+    }
+}
